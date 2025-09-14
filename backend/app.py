@@ -8,10 +8,10 @@ CORS(app)
 
 # Read RDS config from environment variables
 db_config = {
-    'host': os.environ['RDS_HOST'],
-    'user': os.environ['RDS_USER'],
-    'password': os.environ['RDS_PASSWORD'],
-    'database': 'todo_app'
+    'host': os.environ.get('RDS_HOST', 'localhost'),
+    'user': os.environ.get('RDS_USER', 'root'),
+    'password': os.environ.get('RDS_PASSWORD', 'password'),
+    'database': os.environ.get('RDS_DB', 'todo_app')
 }
 
 def get_db_connection():
