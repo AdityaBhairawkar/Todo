@@ -5,10 +5,15 @@ import os
 
 app = Flask(__name__)
 CORS(app)
+rds_host = os.environ.get("RDS_HOST", "localhost")
+
+# Remove port if present
+if ":" in rds_host:
+    rds_host = rds_host.split(":")[0]
 
 # Read RDS config from environment variables
 db_config = {
-    'host': os.environ.get('RDS_HOST', 'localhost'),
+    'host': rds_host,
     'user': os.environ.get('RDS_USER', 'root'),
     'password': os.environ.get('RDS_PASSWORD', 'password'),
     'database': os.environ.get('RDS_DB', 'todo_app')
